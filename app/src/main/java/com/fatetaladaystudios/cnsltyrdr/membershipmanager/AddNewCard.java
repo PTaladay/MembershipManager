@@ -1,11 +1,14 @@
 package com.fatetaladaystudios.cnsltyrdr.membershipmanager;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class AddNewCard extends ActionBarActivity {
@@ -54,4 +57,26 @@ public class AddNewCard extends ActionBarActivity {
          // else continue with any other code you need in the method
 
         }
+    public void onClickSaveButton(View v){
+        MembershipProfileDbHelper membershipProfileDbHelper = new MembershipProfileDbHelper(v.getContext());
+        SQLiteDatabase db = membershipProfileDbHelper.getWritableDatabase();
+        EditText companyName = (EditText)findViewById(R.id.company_name_input);
+        EditText websiteUrl = (EditText)findViewById(R.id.website_url_input);
+        EditText phoneNumber = (EditText)findViewById(R.id.phone_number_input);
+
+
+        ContentValues valuesToInsert = new ContentValues();
+
+        //valuesToInsert.put(MembershipProfileDatabaseContract.MembershipProfile.COLUMN_NAME_BARCODE_RAW_DATA,textField.getText().toString());
+        valuesToInsert.put(MembershipProfileDatabaseContract.MembershipProfile.COLUMN_NAME_COMPANY_NAME,companyName.getText().toString());
+        valuesToInsert.put(MembershipProfileDatabaseContract.MembershipProfile.COLUMN_NAME_WEBSITE_URL,websiteUrl.getText().toString());
+        valuesToInsert.put(MembershipProfileDatabaseContract.MembershipProfile.COLUMN_NAME_PHONE_NUMBER,phoneNumber.getText().toString());
+
+        long newRowId;
+        newRowId = db.insert(
+                MembershipProfileDatabaseContract.MembershipProfile.TABLE_NAME,
+                "null",
+                valuesToInsert);
+
+    }
 }

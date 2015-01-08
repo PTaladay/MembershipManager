@@ -10,6 +10,7 @@ public class MembershipProfileDatabaseContract {
 
     public static abstract class MembershipProfile implements BaseColumns {
         public static final String TABLE_NAME ="membershipprofiles";
+        public static final String COLUMN_NAME_PROFILE_ID = "profileid";
         public static final String COLUMN_NAME_COMPANY_NAME ="companyname";
         public static final String COLUMN_NAME_PHONE_NUMBER ="phonenumber";
         public static final String COLUMN_NAME_WEBSITE_URL ="websiteurl";
